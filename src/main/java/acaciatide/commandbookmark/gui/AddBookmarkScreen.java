@@ -13,6 +13,7 @@ public class AddBookmarkScreen extends Screen {
     private TextFieldWidget labelField;
     private TextFieldWidget commandField;
     private ButtonWidget saveButton;
+    private boolean isDuplicate = false;
 
     public AddBookmarkScreen(BookmarkListScreen parent) {
         super(Text.translatable("gui.commandbookmark.add.title"));
@@ -50,7 +51,12 @@ public class AddBookmarkScreen extends Screen {
     }
 
     private void updateSaveButton() {
-        this.saveButton.active = !this.commandField.getText().trim().isEmpty();
+        String text = this.commandField.getText().trim();
+        this.saveButton.active = !text.isEmpty();
+        
+        // 既存のブックマークとコマンド文字列が完全に一致するか判定する（空白のみの違いは同一とみなす）
+        this.isDuplicate = CommandBookmarkClient.MANAGER.getBookmarks().stream()
+                .anyMatch(b -> b.getCommand().trim().equals(text));
     }
 
     private void save() {
@@ -70,6 +76,10 @@ public class AddBookmarkScreen extends Screen {
         
         context.drawTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.add.label"), this.width / 2 - 100, 35, 0xFFA0A0A0);
         context.drawTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.add.command"), this.width / 2 - 100, 85, 0xFFA0A0A0);
+        
+        if (this.isDuplicate) {
+            context.drawTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.add.duplicate_warning"), this.width / 2 - 100, 122, 0xFFFFAA00);
+        }
     }
 
     @Override
