@@ -41,8 +41,11 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
         private final ButtonWidget deleteButton;
         private final ButtonWidget upButton;
         private final ButtonWidget downButton;
+        private final String displayText;
+        private final List<Text> tooltipText;
 
         public Bookmark getBookmark() { return bookmark; }
+        public List<Text> getTooltipText() { return tooltipText; }
 
         public Entry(Bookmark bookmark, BookmarkListScreen parentScreen) {
             this.bookmark = bookmark;
@@ -69,6 +72,12 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
                 CommandBookmarkClient.MANAGER.moveDown(this.bookmark);
                 BookmarkListWidget.this.updateEntries();
             }).dimensions(0, 0, 20, 20).build();
+
+            this.displayText = this.bookmark.getLabel().isEmpty() ? this.bookmark.getCommand() : this.bookmark.getLabel();
+            this.tooltipText = List.of(
+                Text.literal("§l" + (this.bookmark.getLabel().isEmpty() ? "No Label" : this.bookmark.getLabel())),
+                Text.literal("§7" + this.bookmark.getCommand())
+            );
         }
 
         @Override
@@ -78,11 +87,9 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
             int entryWidth = BookmarkListWidget.this.getRowWidth();
             int entryHeight = 26; // BookmarkListScreenで指定したitemHeightと同じ値
             
-            String displayText = this.bookmark.getLabel().isEmpty() ? this.bookmark.getCommand() : this.bookmark.getLabel();
-            
             // テキストの描画（Y座標を文字の高さに合わせて中央揃え）
             int textY = y + (entryHeight - MinecraftClient.getInstance().textRenderer.fontHeight) / 2;
-            context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, displayText, x + 5, textY, 0xFFFFFFFF);
+            context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, this.displayText, x + 5, textY, 0xFFFFFFFF);
 
             // ボタンのサイズに合わせてY座標を中央揃え
             int buttonSize = 20;

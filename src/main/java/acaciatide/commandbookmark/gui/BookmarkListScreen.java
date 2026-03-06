@@ -53,12 +53,7 @@ public class BookmarkListScreen extends Screen {
                 int x = entry.getX();
                 int entryWidth = this.listWidget.getRowWidth();
                 if (mouseX >= x + 5 && mouseX <= x + entryWidth - 85) {
-                    Bookmark bookmark = entry.getBookmark();
-                    java.util.List<Text> tooltipText = java.util.List.of(
-                        Text.literal("§l" + (bookmark.getLabel().isEmpty() ? "No Label" : bookmark.getLabel())),
-                        Text.literal("§7" + bookmark.getCommand())
-                    );
-                    context.drawTooltip(this.textRenderer, tooltipText, mouseX, mouseY);
+                    context.drawTooltip(this.textRenderer, entry.getTooltipText(), mouseX, mouseY);
                 }
             }
         }
