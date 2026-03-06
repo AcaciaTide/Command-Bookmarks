@@ -56,7 +56,7 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
             String displayText = this.bookmark.getLabel().isEmpty() ? this.bookmark.getCommand() : this.bookmark.getLabel();
             
             // テキストの描画
-            context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, displayText, x + 5, y + 6, 0xFFFFFF);
+            context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, displayText, x + 5, y + 6, 0xFFFFFFFF);
 
             // 実行ボタンの配置と描画
             this.executeButton.setX(x + entryWidth - 50);

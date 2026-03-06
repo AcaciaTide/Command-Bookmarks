@@ -66,10 +66,10 @@ public class AddBookmarkScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFFFF);
         
-        context.drawTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.add.label"), this.width / 2 - 100, 35, 0xA0A0A0);
-        context.drawTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.add.command"), this.width / 2 - 100, 85, 0xA0A0A0);
+        context.drawTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.add.label"), this.width / 2 - 100, 35, 0xFFA0A0A0);
+        context.drawTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.add.command"), this.width / 2 - 100, 85, 0xFFA0A0A0);
     }
 
     @Override

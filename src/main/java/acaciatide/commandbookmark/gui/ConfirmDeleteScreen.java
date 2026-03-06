@@ -39,11 +39,11 @@ public class ConfirmDeleteScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, this.height / 2 - 40, 0xFF5555);
-        context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.delete.message"), this.width / 2, this.height / 2 - 20, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, this.height / 2 - 40, 0xFFFF5555);
+        context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.delete.message"), this.width / 2, this.height / 2 - 20, 0xFFFFFFFF);
         
         String displayText = this.bookmark.getLabel().isEmpty() ? this.bookmark.getCommand() : this.bookmark.getLabel();
-        context.drawCenteredTextWithShadow(this.textRenderer, Text.literal(displayText), this.width / 2, this.height / 2, 0xA0A0A0);
+        context.drawCenteredTextWithShadow(this.textRenderer, Text.literal(displayText), this.width / 2, this.height / 2, 0xFFA0A0A0);
     }
 
     @Override

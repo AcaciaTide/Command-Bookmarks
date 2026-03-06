@@ -43,10 +43,10 @@ public class BookmarkListScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 10, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 10, 0xFFFFFFFF);
 
         if (CommandBookmarkClient.MANAGER.getBookmarks().isEmpty()) {
-            context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.empty"), this.width / 2, this.height / 2, 0xA0A0A0);
+            context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.empty"), this.width / 2, this.height / 2, 0xFFA0A0A0);
         }
     }
 
