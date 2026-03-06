@@ -47,6 +47,20 @@ public class BookmarkListScreen extends Screen {
 
         if (CommandBookmarkClient.MANAGER.getBookmarks().isEmpty()) {
             context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.empty"), this.width / 2, this.height / 2, 0xFFA0A0A0);
+        } else if (this.listWidget != null && this.listWidget.isMouseOver(mouseX, mouseY)) {
+            BookmarkListWidget.Entry entry = this.listWidget.getHoveredEntry();
+            if (entry != null) {
+                int x = entry.getX();
+                int entryWidth = this.listWidget.getRowWidth();
+                if (mouseX >= x + 5 && mouseX <= x + entryWidth - 85) {
+                    Bookmark bookmark = entry.getBookmark();
+                    java.util.List<Text> tooltipText = java.util.List.of(
+                        Text.literal("§l" + (bookmark.getLabel().isEmpty() ? "No Label" : bookmark.getLabel())),
+                        Text.literal("§7" + bookmark.getCommand())
+                    );
+                    context.drawTooltip(this.textRenderer, tooltipText, mouseX, mouseY);
+                }
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import acaciatide.commandbookmark.CommandBookmarkClient;
 import acaciatide.commandbookmark.data.Bookmark;
 import acaciatide.commandbookmark.gui.BookmarkListScreen;
 import acaciatide.commandbookmark.gui.ConfirmDeleteScreen;
+import acaciatide.commandbookmark.gui.EditBookmarkScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -28,11 +29,18 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
         }
     }
 
+    @Override
+    public Entry getHoveredEntry() {
+        return super.getHoveredEntry();
+    }
     public class Entry extends AlwaysSelectedEntryListWidget.Entry<Entry> {
         private final Bookmark bookmark;
         private final BookmarkListScreen parentScreen;
         private final ButtonWidget executeButton;
+        private final ButtonWidget editButton;
         private final ButtonWidget deleteButton;
+
+        public Bookmark getBookmark() { return bookmark; }
 
         public Entry(Bookmark bookmark, BookmarkListScreen parentScreen) {
             this.bookmark = bookmark;
@@ -40,6 +48,10 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
 
             this.executeButton = ButtonWidget.builder(Text.literal("▶"), button -> {
                 this.parentScreen.executeBookmark(this.bookmark);
+            }).dimensions(0, 0, 20, 20).build();
+
+            this.editButton = ButtonWidget.builder(Text.literal("✏"), button -> {
+                MinecraftClient.getInstance().setScreen(new EditBookmarkScreen(this.parentScreen, this.bookmark));
             }).dimensions(0, 0, 20, 20).build();
 
             this.deleteButton = ButtonWidget.builder(Text.literal("🗑"), button -> {
@@ -65,12 +77,17 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
             int buttonY = y + (entryHeight - buttonSize) / 2;
 
             // 実行ボタンの配置と描画
-            this.executeButton.setX(x + entryWidth - 55); // 少し左に寄せる
+            this.executeButton.setX(x + entryWidth - 80); // さらに左に寄せる
             this.executeButton.setY(buttonY);
             this.executeButton.render(context, mouseX, mouseY, tickDelta);
 
+            // 編集ボタンの配置と描画
+            this.editButton.setX(x + entryWidth - 55);
+            this.editButton.setY(buttonY);
+            this.editButton.render(context, mouseX, mouseY, tickDelta);
+
             // 削除ボタンの配置と描画
-            this.deleteButton.setX(x + entryWidth - 30); // 少し左に寄せる
+            this.deleteButton.setX(x + entryWidth - 30);
             this.deleteButton.setY(buttonY);
             this.deleteButton.render(context, mouseX, mouseY, tickDelta);
         }
@@ -78,6 +95,9 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
         @Override
         public boolean mouseClicked(net.minecraft.client.gui.Click click, boolean bl) {
             if (this.executeButton.mouseClicked(click, bl)) {
+                return true;
+            }
+            if (this.editButton.mouseClicked(click, bl)) {
                 return true;
             }
             if (this.deleteButton.mouseClicked(click, bl)) {
