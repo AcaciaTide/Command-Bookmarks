@@ -1,0 +1,19 @@
+{
+    "key.commandbookmark.open_gui": "Open Command Bookmarks",
+    "category.commandbookmark": "Command Bookmark",
+    "gui.commandbookmark.title": "Command Bookmarks",
+    "gui.commandbookmark.add": "Add New",
+    "gui.commandbookmark.close": "Close",
+    "gui.commandbookmark.empty": "No bookmarks yet. Press \"Add New\" to get started!",
+    "gui.commandbookmark.add.title": "Add Bookmark",
+    "gui.commandbookmark.add.label": "Label (optional)",
+    "gui.commandbookmark.add.command": "Command/Chat (*Start with / for command)",
+    "gui.commandbookmark.add.save": "Save",
+    "gui.commandbookmark.add.cancel": "Cancel",
+    "gui.commandbookmark.delete.title": "Delete Command?",
+    "gui.commandbookmark.delete.message": "Are you sure you want to delete this bookmark?",
+    "gui.commandbookmark.delete.confirm": "Delete",
+    "gui.commandbookmark.delete.cancel": "Cancel",
+    "gui.commandbookmark.edit.title": "Edit Bookmark",
+    "gui.commandbookmark.add.duplicate_warning": "⚠ This command is already registered."
+}

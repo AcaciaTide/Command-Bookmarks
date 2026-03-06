@@ -1,0 +1,19 @@
+{
+    "key.commandbookmark.open_gui": "コマンドブックマークを開く",
+    "category.commandbookmark": "コマンドブックマーク",
+    "gui.commandbookmark.title": "コマンドブックマーク",
+    "gui.commandbookmark.add": "＋ 新規追加",
+    "gui.commandbookmark.close": "閉じる",
+    "gui.commandbookmark.empty": "ブックマークはまだありません。「新規追加」から登録しましょう！",
+    "gui.commandbookmark.add.title": "ブックマークを追加",
+    "gui.commandbookmark.add.label": "ラベル（任意）",
+    "gui.commandbookmark.add.command": "コマンド・チャット (*先頭に / でコマンド)",
+    "gui.commandbookmark.add.save": "保存",
+    "gui.commandbookmark.add.cancel": "キャンセル",
+    "gui.commandbookmark.delete.title": "コマンドを削除しますか？",
+    "gui.commandbookmark.delete.message": "このブックマークを削除してもよろしいですか？",
+    "gui.commandbookmark.delete.confirm": "🗑 削除する",
+    "gui.commandbookmark.delete.cancel": "キャンセル",
+    "gui.commandbookmark.edit.title": "ブックマークを編集",
+    "gui.commandbookmark.add.duplicate_warning": "⚠ 既に同じコマンドが登録されています"
+}
