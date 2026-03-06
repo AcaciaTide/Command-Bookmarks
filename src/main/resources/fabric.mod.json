@@ -11,24 +11,14 @@
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/commandbookmark/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
-		"main": [
-			"acaciatide.commandbookmark.Commandbookmark"
-		],
 		"client": [
-			"acaciatide.commandbookmark.CommandbookmarkClient"
+			"acaciatide.commandbookmark.CommandBookmarkClient"
 		]
 	},
-	"mixins": [
-		"commandbookmark.mixins.json",
-		{
-			"config": "commandbookmark.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.18.4",
 		"minecraft": "~1.21.11",
