@@ -37,6 +37,6 @@ public class CommandBookmarkClient implements ClientModInitializer {
             }
         });
 
-        LOGGER.info("Command Bookmark client initialized!");
+        LOGGER.info("Command Bookmarks client initialized!");
     }
 }

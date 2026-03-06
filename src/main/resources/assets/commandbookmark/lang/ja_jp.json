@@ -1,6 +1,6 @@
 {
     "key.commandbookmark.open_gui": "コマンドブックマークを開く",
-    "category.commandbookmark": "コマンドブックマーク",
+    "category.commandbookmark": "Command Bookmarks",
     "gui.commandbookmark.title": "コマンドブックマーク",
     "gui.commandbookmark.add": "＋ 新規追加",
     "gui.commandbookmark.close": "閉じる",

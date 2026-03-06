@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "commandbookmark",
 	"version": "${version}",
-	"name": "commandbookmark",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Command Bookmarks",
+	"description": "A client-side Fabric mod that allows you to bookmark commands and chat messages for easy access.",
 	"authors": [
 		"Me!"
 	],

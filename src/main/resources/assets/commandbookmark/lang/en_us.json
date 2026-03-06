@@ -1,6 +1,6 @@
 {
     "key.commandbookmark.open_gui": "Open Command Bookmarks",
-    "category.commandbookmark": "Command Bookmark",
+    "category.commandbookmark": "Command Bookmarks",
     "gui.commandbookmark.title": "Command Bookmarks",
     "gui.commandbookmark.add": "Add New",
     "gui.commandbookmark.close": "Close",
