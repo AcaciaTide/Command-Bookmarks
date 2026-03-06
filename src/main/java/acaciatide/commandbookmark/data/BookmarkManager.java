@@ -39,8 +39,18 @@ public class BookmarkManager {
                 bookmarks.add(GSON.fromJson(el, Bookmark.class));
             }
         } catch (IOException | JsonParseException e) {
-            bookmarks = new ArrayList<>();
             CommandBookmarkClient.LOGGER.error("Failed to load bookmarks", e);
+            bookmarks = new ArrayList<>();
+            // パースエラー時などでファイルが壊れている場合、.bakとしてバックアップを作成
+            if (Files.exists(CONFIG_PATH)) {
+                try {
+                    Path backupPath = CONFIG_PATH.resolveSibling(CONFIG_PATH.getFileName() + ".bak");
+                    Files.copy(CONFIG_PATH, backupPath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    CommandBookmarkClient.LOGGER.warn("Corrupted config file backed up to " + backupPath);
+                } catch (IOException ex) {
+                    CommandBookmarkClient.LOGGER.error("Failed to create backup file", ex);
+                }
+            }
         }
     }
 
