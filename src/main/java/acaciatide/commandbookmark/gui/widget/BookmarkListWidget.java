@@ -52,20 +52,26 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
             int x = this.getX();
             int y = this.getY();
             int entryWidth = BookmarkListWidget.this.getRowWidth();
+            int entryHeight = 26; // BookmarkListScreenで指定したitemHeightと同じ値
             
             String displayText = this.bookmark.getLabel().isEmpty() ? this.bookmark.getCommand() : this.bookmark.getLabel();
             
-            // テキストの描画
-            context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, displayText, x + 5, y + 6, 0xFFFFFFFF);
+            // テキストの描画（Y座標を文字の高さに合わせて中央揃え）
+            int textY = y + (entryHeight - MinecraftClient.getInstance().textRenderer.fontHeight) / 2;
+            context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, displayText, x + 5, textY, 0xFFFFFFFF);
+
+            // ボタンのサイズに合わせてY座標を中央揃え
+            int buttonSize = 20;
+            int buttonY = y + (entryHeight - buttonSize) / 2;
 
             // 実行ボタンの配置と描画
-            this.executeButton.setX(x + entryWidth - 50);
-            this.executeButton.setY(y);
+            this.executeButton.setX(x + entryWidth - 55); // 少し左に寄せる
+            this.executeButton.setY(buttonY);
             this.executeButton.render(context, mouseX, mouseY, tickDelta);
 
             // 削除ボタンの配置と描画
-            this.deleteButton.setX(x + entryWidth - 25);
-            this.deleteButton.setY(y);
+            this.deleteButton.setX(x + entryWidth - 30); // 少し左に寄せる
+            this.deleteButton.setY(buttonY);
             this.deleteButton.render(context, mouseX, mouseY, tickDelta);
         }
 
