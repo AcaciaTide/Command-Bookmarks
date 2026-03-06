@@ -3,13 +3,12 @@
 	"id": "commandbookmark",
 	"version": "${version}",
 	"name": "Command Bookmarks",
-	"description": "A client-side Fabric mod that allows you to bookmark commands and chat messages for easy access.",
+	"description": " A client-side Fabric mod that lets you bookmark and execute frequently used commands and chat messages with a single click. ",
 	"authors": [
-		"Me!"
+		"AcaciaTide"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/AcaciaTide/Command-Bookmarks"
 	},
 	"license": "MIT",
 	"icon": "assets/commandbookmark/icon.png",
