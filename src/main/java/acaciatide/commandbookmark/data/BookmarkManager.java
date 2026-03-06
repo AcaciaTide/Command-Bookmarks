@@ -91,6 +91,34 @@ public class BookmarkManager {
         }
     }
 
+    public void moveUp(Bookmark bookmark) {
+        int index = -1;
+        for (int i = 0; i < bookmarks.size(); i++) {
+            if (bookmarks.get(i).getId().equals(bookmark.getId())) {
+                index = i;
+                break;
+            }
+        }
+        if (index > 0) {
+            Collections.swap(bookmarks, index, index - 1);
+            save();
+        }
+    }
+
+    public void moveDown(Bookmark bookmark) {
+        int index = -1;
+        for (int i = 0; i < bookmarks.size(); i++) {
+            if (bookmarks.get(i).getId().equals(bookmark.getId())) {
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0 && index < bookmarks.size() - 1) {
+            Collections.swap(bookmarks, index, index + 1);
+            save();
+        }
+    }
+
     public List<Bookmark> getBookmarks() {
         return Collections.unmodifiableList(bookmarks);
     }

@@ -39,6 +39,8 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
         private final ButtonWidget executeButton;
         private final ButtonWidget editButton;
         private final ButtonWidget deleteButton;
+        private final ButtonWidget upButton;
+        private final ButtonWidget downButton;
 
         public Bookmark getBookmark() { return bookmark; }
 
@@ -56,6 +58,16 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
 
             this.deleteButton = ButtonWidget.builder(Text.literal("🗑"), button -> {
                 MinecraftClient.getInstance().setScreen(new ConfirmDeleteScreen(this.parentScreen, this.bookmark));
+            }).dimensions(0, 0, 20, 20).build();
+
+            this.upButton = ButtonWidget.builder(Text.literal("↑"), button -> {
+                CommandBookmarkClient.MANAGER.moveUp(this.bookmark);
+                BookmarkListWidget.this.updateEntries();
+            }).dimensions(0, 0, 20, 20).build();
+
+            this.downButton = ButtonWidget.builder(Text.literal("↓"), button -> {
+                CommandBookmarkClient.MANAGER.moveDown(this.bookmark);
+                BookmarkListWidget.this.updateEntries();
             }).dimensions(0, 0, 20, 20).build();
         }
 
@@ -77,19 +89,31 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
             int buttonY = y + (entryHeight - buttonSize) / 2;
 
             // 実行ボタンの配置と描画
-            this.executeButton.setX(x + entryWidth - 80); // さらに左に寄せる
+            this.executeButton.setX(x + entryWidth - 130);
             this.executeButton.setY(buttonY);
             this.executeButton.render(context, mouseX, mouseY, tickDelta);
 
             // 編集ボタンの配置と描画
-            this.editButton.setX(x + entryWidth - 55);
+            this.editButton.setX(x + entryWidth - 105);
             this.editButton.setY(buttonY);
             this.editButton.render(context, mouseX, mouseY, tickDelta);
 
             // 削除ボタンの配置と描画
-            this.deleteButton.setX(x + entryWidth - 30);
+            this.deleteButton.setX(x + entryWidth - 80);
             this.deleteButton.setY(buttonY);
             this.deleteButton.render(context, mouseX, mouseY, tickDelta);
+
+            // 並び替えボタン（↑）の配置と描画
+            this.upButton.active = BookmarkListWidget.this.children().indexOf(this) > 0;
+            this.upButton.setX(x + entryWidth - 55);
+            this.upButton.setY(buttonY);
+            this.upButton.render(context, mouseX, mouseY, tickDelta);
+
+            // 並び替えボタン（↓）の配置と描画
+            this.downButton.active = BookmarkListWidget.this.children().indexOf(this) < BookmarkListWidget.this.children().size() - 1;
+            this.downButton.setX(x + entryWidth - 30);
+            this.downButton.setY(buttonY);
+            this.downButton.render(context, mouseX, mouseY, tickDelta);
         }
 
         @Override
@@ -101,6 +125,12 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
                 return true;
             }
             if (this.deleteButton.mouseClicked(click, bl)) {
+                return true;
+            }
+            if (this.upButton.mouseClicked(click, bl)) {
+                return true;
+            }
+            if (this.downButton.mouseClicked(click, bl)) {
                 return true;
             }
             return super.mouseClicked(click, bl);
