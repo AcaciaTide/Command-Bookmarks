@@ -27,6 +27,11 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
         for (Bookmark bookmark : bookmarks) {
             this.addEntry(new Entry(bookmark, this.parentScreen));
         }
+        for (int i = 0; i < this.children().size(); i++) {
+            Entry entry = this.children().get(i);
+            entry.upButton.active = i > 0;
+            entry.downButton.active = i < this.children().size() - 1;
+        }
     }
 
     @Override
@@ -111,13 +116,11 @@ public class BookmarkListWidget extends AlwaysSelectedEntryListWidget<BookmarkLi
             this.deleteButton.render(context, mouseX, mouseY, tickDelta);
 
             // 並び替えボタン（↑）の配置と描画
-            this.upButton.active = BookmarkListWidget.this.children().indexOf(this) > 0;
             this.upButton.setX(x + entryWidth - 55);
             this.upButton.setY(buttonY);
             this.upButton.render(context, mouseX, mouseY, tickDelta);
 
             // 並び替えボタン（↓）の配置と描画
-            this.downButton.active = BookmarkListWidget.this.children().indexOf(this) < BookmarkListWidget.this.children().size() - 1;
             this.downButton.setX(x + entryWidth - 30);
             this.downButton.setY(buttonY);
             this.downButton.render(context, mouseX, mouseY, tickDelta);
