@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 public class BookmarkListScreen extends Screen {
     private final Screen parent;
     private BookmarkListWidget listWidget;
+    private ButtonWidget modeButton;
 
     public BookmarkListScreen(Screen parent) {
         super(Text.translatable("gui.commandbookmark.title"));
@@ -20,6 +21,13 @@ public class BookmarkListScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+
+        CommandBookmarkClient.MANAGER.updateLocalContext();
+
+        this.modeButton = ButtonWidget.builder(Text.empty(), button -> this.toggleMode())
+                .dimensions(this.width - 160 - 10, 10, 160, 20).build();
+        this.updateModeButtonText();
+        this.addDrawableChild(this.modeButton);
 
         this.listWidget = new BookmarkListWidget(this.client, this.width, this.height - 70, 32, 26, this);
         this.addDrawableChild(this.listWidget);
@@ -40,14 +48,39 @@ public class BookmarkListScreen extends Screen {
         }).dimensions(startX + buttonWidth + 10, buttonY, closeWidth, 20).build());
     }
 
+    private void toggleMode() {
+        boolean current = CommandBookmarkClient.MANAGER.isGlobalMode();
+        CommandBookmarkClient.MANAGER.setGlobalMode(!current);
+        CommandBookmarkClient.MANAGER.updateLocalContext(); // 念のためフォールバック再チェック
+        this.updateModeButtonText();
+        this.listWidget.updateEntries();
+    }
+
+    private void updateModeButtonText() {
+        if (CommandBookmarkClient.MANAGER.isGlobalMode()) {
+            this.modeButton.setMessage(Text.translatable("gui.commandbookmark.mode.global"));
+        } else {
+            String worldId = CommandBookmarkClient.MANAGER.getCurrentLocalId();
+            if (worldId == null) {
+                // ローカルが取得不能な場合はグローバルに強制フォールバック
+                CommandBookmarkClient.MANAGER.setGlobalMode(true);
+                this.modeButton.setMessage(Text.translatable("gui.commandbookmark.mode.global"));
+            } else {
+                String shortId = worldId.replaceFirst("^(local|server)_", "");
+                if (shortId.length() > 15) shortId = shortId.substring(0, 15) + "...";
+                this.modeButton.setMessage(Text.translatable("gui.commandbookmark.mode.local", shortId));
+            }
+        }
+    }
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 10, 0xFFFFFFFF);
 
-        if (CommandBookmarkClient.MANAGER.getBookmarks().isEmpty()) {
+        if (this.listWidget == null || this.listWidget.children().isEmpty()) {
             context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.commandbookmark.empty"), this.width / 2, this.height / 2, 0xFFA0A0A0);
-        } else if (this.listWidget != null && this.listWidget.isMouseOver(mouseX, mouseY)) {
+        } else if (this.listWidget.isMouseOver(mouseX, mouseY)) {
             BookmarkListWidget.Entry entry = this.listWidget.getHoveredEntry();
             if (entry != null) {
                 int x = entry.getX();

@@ -12,8 +12,10 @@
     "gui.commandbookmark.add.cancel": "キャンセル",
     "gui.commandbookmark.delete.title": "コマンドを削除しますか？",
     "gui.commandbookmark.delete.message": "このブックマークを削除してもよろしいですか？",
-    "gui.commandbookmark.delete.confirm": "🗑 削除する",
+    "gui.commandbookmark.delete.confirm": "削除する",
     "gui.commandbookmark.delete.cancel": "キャンセル",
     "gui.commandbookmark.edit.title": "ブックマークを編集",
-    "gui.commandbookmark.add.duplicate_warning": "⚠ 既に同じコマンドが登録されています"
+    "gui.commandbookmark.add.duplicate_warning": "⚠ 既に同じコマンドが登録されています",
+    "gui.commandbookmark.mode.global": "グローバル",
+    "gui.commandbookmark.mode.local": "ローカル (%s)"
 }

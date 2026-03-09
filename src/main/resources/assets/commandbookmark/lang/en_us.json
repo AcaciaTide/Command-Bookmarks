@@ -15,5 +15,7 @@
     "gui.commandbookmark.delete.confirm": "Delete",
     "gui.commandbookmark.delete.cancel": "Cancel",
     "gui.commandbookmark.edit.title": "Edit Bookmark",
-    "gui.commandbookmark.add.duplicate_warning": "⚠ This command is already registered."
+    "gui.commandbookmark.add.duplicate_warning": "⚠ This command is already registered.",
+    "gui.commandbookmark.mode.global": "Global",
+    "gui.commandbookmark.mode.local": "Local (%s)"
 }
