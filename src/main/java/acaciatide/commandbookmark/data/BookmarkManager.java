@@ -3,8 +3,7 @@ package acaciatide.commandbookmark.data;
 import acaciatide.commandbookmark.CommandBookmarkClient;
 import com.google.gson.*;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-
+import net.minecraft.client.Minecraft;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -131,11 +130,11 @@ public class BookmarkManager {
     }
 
     private String fetchCurrentWorldId() {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.isInSingleplayer() && client.getServer() != null) {
-            return "local_" + client.getServer().getSaveProperties().getLevelName().replaceAll("[^a-zA-Z0-9_\\-]", "_");
-        } else if (client.getCurrentServerEntry() != null) {
-            return "server_" + client.getCurrentServerEntry().address.replaceAll("[^a-zA-Z0-9_\\-]", "_");
+        Minecraft client = Minecraft.getInstance();
+        if (client.isLocalServer() && client.getSingleplayerServer() != null) {
+            return "local_" + client.getSingleplayerServer().getWorldData().getLevelName().replaceAll("[^a-zA-Z0-9_\\-]", "_");
+        } else if (client.getCurrentServer() != null) {
+            return "server_" + client.getCurrentServer().ip.replaceAll("[^a-zA-Z0-9_\\-]", "_");
         }
         return null;
     }
